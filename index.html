@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/reset.css">
+    <script src="script/html2canvas.js"></script>
+    <title>MAQUINA DE MEMES</title>
+</head>
+<body style="background-image: url('pictures/background/background-body.png');">
+    <div class="container">
+
+        <div class="app">
+            <header>
+                <div class="logo">
+                    <img id="logo" src="pictures/background/logo.png" alt="img-logo" title="img-logo">
+                </div>
+            </header>
+            <main>
+                <section id="colors">
+                    <ul style="list-style: none;">
+                        <li id="black-colors" style="background-color: black" onclick="colorsBackground()"></li>
+                        <li id="red-colors" style="background-color:red;"></li>
+                        <li id="yellow-colors" style="background-color: yellow;"></li>
+                        <li id="white-colors" style="background-color:white;"></li>
+                    </ul>
+                </section>
+                <section id="conteudo">
+                   
+                    <div class="app-img" id="downlabled">
+                        <textarea name="" class="text-box" placeholder="Digite seu meme" aria-multiline="true"></textarea>
+                        <div id="display-img"></div>
+                        <textarea name="" class="text-box" placeholder="Digite seu meme" aria-multiline="true"></textarea>
+                    </div>
+                    <div class="app-photo-picker">
+                        <select id="meme-list">
+                            <option value="1">Escolha uma imagem</option>
+                        </select>
+                        <input
+                        type="file"
+                        id="img-input"
+                        accept="image/jpg, image/png, image/jpeg">
+                
+                    </div>
+                </section>  
+            </main>
+            
+            <footer class="download">
+                <button id="btn-download">DOWNLOAD</button>
+            </footer> 
+        </div>
+    </div>
+    <script>
+
+        document.getElementById("btn-download").onclick = () =>{
+          const screenshotPrint = document.querySelector("#downlabled")
+    
+          html2canvas(screenshotPrint).then((canvas)=>{
+            const base64Image = canvas.toDataURL("image/png")
+            let anchor = document.createElement("a")
+            anchor.setAttribute("href", base64Image)
+            anchor.setAttribute("download", "my-meme.png")
+            anchor.click()
+            anchor.remove()
+          })
+    
+        }
+        
+
+      </script>
+</body>
+<script src="script/script.js"></script>
+
+</html>
