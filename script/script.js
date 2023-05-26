@@ -21,19 +21,43 @@ function enablePhotoUpload(){
 }
 
 function colorsBackground() {
-  const listItems = document.querySelectorAll("#colors li");
+  const listItems = document.querySelectorAll("#colors-background-textarea li");
+  const textareas = document.querySelectorAll(".text-box");
+
+  
+
+
+  listItems.forEach(item => {
+    item.addEventListener("click", function() {
+      const computedStyle = getComputedStyle(this);
+      const backgroundColor = computedStyle.backgroundColor;
+      
+      textareas.forEach(textarea =>{
+        textarea.style.backgroundColor = backgroundColor;
+      })
+    });
+  });
+}
+
+function colorsText () {
+  const listItems = document.querySelectorAll("#colors-text-textarea li");
+  const textareas = document.querySelectorAll(".text-box");
 
   listItems.forEach(item => {
     item.addEventListener("click", function() {
       const computedStyle = getComputedStyle(this);
       const backgroundColor = computedStyle.backgroundColor;
 
-      console.log(backgroundColor);
+      
+      textareas.forEach(textarea =>{
+        textarea.style.color = backgroundColor;
+      });
     });
   });
 }
 
-colorsBackground();
+
+
 
 async function mapImageList(){
   const memesObject = [
@@ -46,12 +70,12 @@ async function mapImageList(){
       "path": "/pictures/chloe.jpg"
     },
     {
-      "name": "funny-cat1",
-      "path": "/pictures/funny-cat1.png"
+      "name": "Mc Poze",
+      "path": "/pictures/Mc-Poze.jpeg"
     },
     {
-      "name": "funny-cat2",
-      "path": "/pictures/funny-cat2.png"
+      "name": "Gatinho",
+      "path": "/pictures/gatinho.jpeg"
     },
 
   ]
@@ -87,6 +111,8 @@ async function changeMemePicture(photo) {
 
 async function main(){
   const memesImageList = await mapImageList()
+  colorsText();
+  colorsBackground();
   enablePhotoUpload()
   await createGallery(memesImageList)
   await changeMemePicture(memesImageList[1].path)
